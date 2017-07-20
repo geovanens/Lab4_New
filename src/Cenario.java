@@ -156,16 +156,7 @@ public class Cenario {
 	 */
 	public String getEstado() {
 		return status.getValor();
-	}
-	
-//	/**
-//	 * Altera o estado do cenario
-//	 * @param ocorreu identifica se o cenario ocorreu ou não. 
-//	 */
-//	public void setEstado(boolean ocorreu) {
-//		status = ocorreu? Status.OCORREU : Status.NAO_OCORREU;
-//	}
-	
+	}	
 	
 	/**
 	 * 
