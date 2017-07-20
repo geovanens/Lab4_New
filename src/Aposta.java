@@ -2,19 +2,19 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 
 /**
- * Classe responsável pelas apostas que são cadastradas nos possíveis cenários
+ * Classe responsável pelas apostas que são cadastradas nos possíveis cenários. 
  * 
  * @author Geovane do Nascimento Silva - 116211149
  *
  */
 public class Aposta {
-	protected String apostador;
-	protected int valor;
-	protected boolean previsao;
-	protected Seguro seguro;
+	private String apostador;
+	private int valor;
+	private boolean previsao;
+	private Seguro seguro;
 
 	/**
-	 * Método Contrutor da de uma aposta sem seguro.
+	 * Método Contrutor de uma aposta normal(sem seguro).
 	 * @param apostador o nome do apostador.
 	 * @param valor o valor a ser apostado.
 	 * @param previsao a previsao informando se o cenário irá ou não acontecer.
@@ -26,6 +26,14 @@ public class Aposta {
 		this.seguro = new Seguro();
 	}
 	
+	/**
+	 * Método Contrutor de uma aposta com seguro por valor.
+	 * @param apostador o nome do apostador.
+	 * @param valor o valor a ser apostado.
+	 * @param previsao a previsao informando se o cenário irá ou não acontecer.
+	 * @param valorAssegurado o valor a ser assegurado pela aposta. Caso o apostador perca a aposta, este 
+	 * valor retorna para ele. 
+	 */
 	public Aposta(String apostador, int valor, boolean previsao, int valorAssegurado) {
 		this.apostador = apostador;
 		this.valor = valor;
@@ -34,6 +42,14 @@ public class Aposta {
 //		this.seguro = new Seguro(valorAssegurado);
 	}
 
+	/**
+	 * Método Contrutor de uma aposta com seguro por taxa.
+	 * @param apostador o nome do apostador.
+	 * @param valor o valor a ser apostado.
+	 * @param previsao a previsao informando se o cenário irá ou não acontecer.
+	 * @param taxaAssegurada a taxa do valor da aposta que será assegurada. Caso o apostador perca a aposta, este 
+	 * valor retorna para ele (taxa * valor).  
+	 */
 	public Aposta(String apostador, int valor, boolean previsao, double taxaAssegurada) {
 		this.apostador = apostador;
 		this.valor = valor;
@@ -43,10 +59,10 @@ public class Aposta {
 	}
 
 	/**
-	 * Método responsável por transformar o valor de centavos em reais.
+	 * Método responsável por transformar o valor de uma aposta de centavos em reais.
 	 * @return formatado o valor em reais. 
 	 */
-	public String valorEmReais() {
+	private String valorEmReais() {
 		double valorEmReais = this.valor / 100.0;
 		BigDecimal valor = new BigDecimal (valorEmReais);  
 		NumberFormat nf = NumberFormat.getCurrencyInstance();  
@@ -54,18 +70,6 @@ public class Aposta {
 		return formatado;
 	}
 	
-	/**
-	 * Método responsável pela representação em String de uma aposta. A representação segue o modelo 
-	 * "NOME - R$ VALOR - PREVISAO"
-	 * 
-	 * @return a representação em String de uma aposta.
-	 */
-	@Override
-	public String toString() {
-		return this.apostador + " - " +  valorEmReais() + " - " + 
-				(this.previsao?"VAI ACONTECER" : "N VAI ACONTECER") + seguro.toString(); 
-	}
-
 	/**
 	 * Pega o nome do apostador
 	 * @return o nome do apostador.
@@ -90,17 +94,43 @@ public class Aposta {
 		return this.previsao;
 	}
 	
+	/**
+	 * Pega o valor assegurado da aposta. 
+	 * @return o valor do seguro da aposta. 
+	 */
 	public int getValorAssegurado() {
 		return seguro.getValor();
 	}
 	
+	/**
+	 * Altera um seguro de taxa para valor.
+	 * @param valor o valor do seguro. 
+	 */
 	public void setSeguro(int valor) {
 //		this.seguro.setSeguro(valor);
 		this.seguro = new SeguroValor(valor);
 	}
 	
+	/**
+	 * Altera um seguro de valor para taxa
+	 * @param taxa a  taxa do seguro. 
+	 */
 	public void setSeguro(double taxa) {
 //		this.seguro.setSeguro(taxa, this.valor);
 		this.seguro = new SeguroTaxa(taxa, this.valor);
+	}
+	
+	/**
+	 * Método responsável pela representação em String de uma aposta. A representação segue o modelo 
+	 * "NOME - R$ VALOR - PREVISAO". No caso de apostas assegurada o modelo é 
+	 * "NOME - R$ VALOR - PREVISAO - ASSEGURADA (VALOR) - R$ XX,XX" ou 
+	 * "NOME - R$ VALOR - PREVISAO - ASSEGURADA (TAXA) - X%"
+	 * 
+	 * @return a representação em String de uma aposta.
+	 */
+	@Override
+	public String toString() {
+		return this.apostador + " - " +  valorEmReais() + " - " + 
+				(this.previsao?"VAI ACONTECER" : "N VAI ACONTECER") + seguro.toString(); 
 	}
 }

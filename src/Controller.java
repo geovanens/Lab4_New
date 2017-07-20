@@ -104,8 +104,7 @@ public class Controller {
 	 * @param custo o custo que o apostador paga pela aposta. 
 	 * @return o id da aposta assegurada no cenário. 
 	 */
-	public int cadastrarAposta(int cenario, String apostador, int valor, String previsao, double taxaAssegurada,
-			int custo) {
+	public int cadastrarAposta(int cenario, String apostador, int valor, String previsao, double taxaAssegurada, int custo) {
 		String msg = "Erro no cadastro de aposta assegurada por taxa: ";
 		excecoes.apostaInvalida(cenario, cenarios.containsKey(cenario), apostador, valor, previsao, msg);
 		excecoes.seguroInvalido(taxaAssegurada, custo);
@@ -191,7 +190,7 @@ public class Controller {
 		
 		this.cenarios.get(cenario).fecharAposta(ocorreu);
 		caixa += getCaixaCenario(cenario);
-		caixa -= cenarios.get(cenario).retornoAssegurado();
+		caixa -= cenarios.get(cenario).perdedoresAssegurados();
 	}
 
 	/**

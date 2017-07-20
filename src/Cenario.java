@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelos cenários de apostas
+ * Classe responsável pelos cenários de apostas. 
  * 
  * @author Geovane do Nascimento Silva - 116211149
  *
@@ -43,7 +43,7 @@ public class Cenario {
 	}
 
 	/**
-	 * Adiciona uma aposta ao cenário caso o cenario nao esteja finalizado.
+	 * Adiciona uma aposta ao cenário caso o cenario.
 	 * @param nome o nome do apostador. 
 	 * @param valor o valor da aposta. 
 	 * @param previsao a previsão da aposta. 
@@ -85,6 +85,24 @@ public class Cenario {
 		
 		return apostas.size();
 	}
+	
+	/**
+	 * Altera uma aposta do tipo taxa para valor.
+	 * @param apostaAssegurada o id da aposta a ser alterada. 
+	 * @param valor o novo valor da aposta assegurada. 
+	 */
+	public void alteraSeguroValor(int apostaAssegurada, int valor) {
+		apostas.get(apostaAssegurada).setSeguro(valor);
+	}
+
+	/**
+	 * Altera uma aposta do tipo valor para taxa.
+	 * @param apostaAssegurada o id da aposta a ser alterada. 
+	 * @param taxa a nova taxa da aposta assegurada. 
+	 */
+	public void alteraSeguroTaxa(int apostaAssegurada, double taxa) {
+		apostas.get(apostaAssegurada).setSeguro(taxa);
+	}
 
 	/**
 	 * Pega o total em centavos do valor apostado no cenário. 
@@ -95,7 +113,7 @@ public class Cenario {
 	}
 	
 	/**
-	 * Pega o total de apostas do cenário. 
+	 * Pega o número total de apostas do cenário. 
 	 * @return o total de apostas do cenário. 
 	 */
 	public int totalApostas() {
@@ -140,13 +158,13 @@ public class Cenario {
 		return status.getValor();
 	}
 	
-	/**
-	 * Altera o estado do cenario
-	 * @param ocorreu identifica se o cenario ocorreu ou não. 
-	 */
-	public void setEstado(boolean ocorreu) {
-		status = ocorreu? Status.OCORREU : Status.NAO_OCORREU;
-	}
+//	/**
+//	 * Altera o estado do cenario
+//	 * @param ocorreu identifica se o cenario ocorreu ou não. 
+//	 */
+//	public void setEstado(boolean ocorreu) {
+//		status = ocorreu? Status.OCORREU : Status.NAO_OCORREU;
+//	}
 	
 	
 	/**
@@ -177,14 +195,11 @@ public class Cenario {
 	 * Calcula o valor do cenario que sera destinado aos seguros de apostas. 
 	 * @return assegurados valor destinados aos seguros das apostas. 
 	 */
-	public int retornoAssegurado() {
+	public int perdedoresAssegurados() {
 		int assegurados = 0;
 		for (Aposta aposta: apostas) {
-			int i = 0;
 			if (!ganhou(aposta))
 				assegurados += aposta.getValorAssegurado();
-				i++;
-				System.out.println(i + " " + assegurados);
 		}
 		return assegurados;
 	}
@@ -200,28 +215,10 @@ public class Cenario {
 		}
 		return false;
 	}
-
-	/**
-	 * Altera uma aposta do tipo taxa para valor.
-	 * @param apostaAssegurada o id da aposta a ser alterada. 
-	 * @param valor o novo valor da aposta assegurada. 
-	 */
-	public void alteraSeguroValor(int apostaAssegurada, int valor) {
-		apostas.get(apostaAssegurada).setSeguro(valor);
-	}
-
-	/**
-	 * Altera uma aposta do tipo valor para taxa.
-	 * @param apostaAssegurada o id da aposta a ser alterada. 
-	 * @param taxa a nova taxa da aposta assegurada. 
-	 */
-	public void alteraSeguroTaxa(int apostaAssegurada, double taxa) {
-		apostas.get(apostaAssegurada).setSeguro(taxa);
-		
-	}
 	
 	/**
-	 * Calcula o total de apostadores que perderam.
+	 * Verifica se uma aposta é considerada vencedora.
+	 * @param aposta a aposta a ser verificada. 
 	 * @return o valor total lucrado com base nos apostadores que perderam. 
 	 */
 	private boolean ganhou(Aposta aposta) {
@@ -234,7 +231,7 @@ public class Cenario {
 	}
 	
 	/**
-	 * Calcula o total de apostadores que perderam.
+	 * Calcula o valor total dos apostadores que perderam.
 	 * @return o valor total lucrado com base nos apostadores que perderam. 
 	 */
 	private int perdedores() {

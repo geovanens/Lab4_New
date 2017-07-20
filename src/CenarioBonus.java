@@ -31,9 +31,7 @@ public class CenarioBonus extends Cenario {
 	@Override
 	public int getTotalRateio(int getCaixaCenario, double taxa) {
 		int rateio = bonus;
-		System.out.println(bonus + " passei");
 		rateio += (getCaixaCenario / taxa) - getCaixaCenario;
-		System.out.println(rateio + " passei");
 		return rateio;
 	}
 	
