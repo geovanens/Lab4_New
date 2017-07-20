@@ -31,6 +31,7 @@ public class Aposta {
 		this.valor = valor;
 		this.previsao = previsao;
 		this.seguro = new SeguroValor(valorAssegurado);
+//		this.seguro = new Seguro(valorAssegurado);
 	}
 
 	public Aposta(String apostador, int valor, boolean previsao, double taxaAssegurada) {
@@ -38,6 +39,7 @@ public class Aposta {
 		this.valor = valor;
 		this.previsao = previsao;
 		this.seguro = new SeguroTaxa(taxaAssegurada, valor);
+//		this.seguro = new Seguro(taxaAssegurada, valor);
 	}
 
 	/**
@@ -93,10 +95,12 @@ public class Aposta {
 	}
 	
 	public void setSeguro(int valor) {
+//		this.seguro.setSeguro(valor);
 		this.seguro = new SeguroValor(valor);
 	}
 	
 	public void setSeguro(double taxa) {
+//		this.seguro.setSeguro(taxa, this.valor);
 		this.seguro = new SeguroTaxa(taxa, this.valor);
 	}
 }

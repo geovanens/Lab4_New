@@ -10,6 +10,8 @@ public class SeguroTaxa extends Seguro{
 	    int percent = (int) (taxa * 100);
 	    return percent;
 	}
+
+		
 	@Override
 	public String toString() {
 		return " - ASSEGURADA (TAXA) - " + seguroPercent() + "%";

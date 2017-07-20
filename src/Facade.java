@@ -134,7 +134,7 @@ public class Facade {
      * @return o id da aposta em um cenário do sistema. 
      */
     public int alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
-    	return controleDoSistema.alteraSeguroTaxa(cenario, apostaAssegurada, taxa);
+    	return controleDoSistema.alteraSeguroTaxa(cenario, apostaAssegurada-1, taxa);
     }
 	
 	/**
