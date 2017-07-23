@@ -161,7 +161,7 @@ public class Controller {
 		
 		int total = 0;
 		Cenario cenarioVerificar = cenarios.get(cenario);
-		total = cenarioVerificar.getCaixa();
+		total = cenarioVerificar.getValorTotalApostas();
 		return total;
 	}
 
@@ -225,31 +225,33 @@ public class Controller {
 	/**
      * Altera uma aposta do tipo taxa para o tipo valor.
      * @param cenario o cenario em que a aposta assegurada está cadastrada. 
-     * @param apostaAssegurada o id da aposta no cenário. 
+     * @param idAssegurada o id da aposta no cenário. 
      * @param valor o valor que passará a ser assegurado pela aposta. 
      * @return o id da aposta em um cenário do sistema. 
      */
-	public int alteraSeguroValor(int cenario, int apostaAssegurada, int valor) {
-		excecoes.alteracaoInvalida(cenario, cenarios.containsKey(cenario), apostaAssegurada, valor);
-		excecoes.naoContemAposta(cenarios.get(cenario).contem(apostaAssegurada));
+	public int alteraSeguroValor(int cenario, int idAssegurada, int valor) {
+		int apostaAssegurada = idAssegurada-1;
+		excecoes.alteracaoInvalida(cenario, cenarios.containsKey(cenario), idAssegurada, valor);
+		excecoes.naoContemAposta(cenarios.get(cenario).contemAssegurada(apostaAssegurada));
 		
 		cenarios.get(cenario).alteraSeguroValor(apostaAssegurada, valor);
-		return apostaAssegurada;
+		return idAssegurada;
 	}
 
 	/**
      * Altera uma aposta do tipo valor para o tipo taxa.
      * @param cenario o cenario em que a aposta assegurada está cadastrada. 
-     * @param apostaAssegurada o id da aposta no cenário. 
+     * @param idAssegurada o id da aposta no cenário. 
      * @param taxa a taxa que passará a ser assegurada pela aposta. 
      * @return o id da aposta em um cenário do sistema. 
      */
-	public int alteraSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
-		excecoes.alteracaoInvalida(cenario, cenarios.containsKey(cenario), apostaAssegurada, taxa);
-		excecoes.naoContemAposta(cenarios.get(cenario).contem(apostaAssegurada));
+	public int alteraSeguroTaxa(int cenario, int idAssegurada, double taxa) {
+		int apostaAssegurada = idAssegurada-1;
+		excecoes.alteracaoInvalida(cenario, cenarios.containsKey(cenario), idAssegurada, taxa);
+		excecoes.naoContemAposta(cenarios.get(cenario).contemAssegurada(apostaAssegurada));
 		
 		cenarios.get(cenario).alteraSeguroTaxa(apostaAssegurada, taxa);
-		return apostaAssegurada;
+		return idAssegurada;
 	}
 	
 	/**

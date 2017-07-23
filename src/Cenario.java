@@ -12,7 +12,7 @@ public class Cenario {
 	protected Status status;
 	protected String descricao;
 	protected int id;
-	protected int caixa;
+	protected int valorTotalApostas;
 	protected boolean fechado;
 	protected ArrayList<Aposta> apostas;
 	
@@ -25,7 +25,7 @@ public class Cenario {
 		this.status = Status.NAO_FINALIZADO;
 		this.descricao = descricao;
 		this.id = id;
-		this.caixa = 0;
+		this.valorTotalApostas = 0;
 		this.fechado = false;
 		this.apostas = new ArrayList<>();
 	}
@@ -51,7 +51,7 @@ public class Cenario {
 	public void addAposta(String nome, int valor, boolean previsao) {
 		Aposta aposta = new Aposta(nome, valor, previsao);
 		apostas.add(aposta);
-		caixa += valor;
+		valorTotalApostas += valor;
 	}
 	
 	/**
@@ -65,7 +65,7 @@ public class Cenario {
 	public int addAposta(String apostador, int valor, boolean previsao, int valorAssegurado) {
 		Aposta aposta = new Aposta(apostador, valor, previsao, valorAssegurado);
 		apostas.add(aposta);
-		caixa += valor;
+		valorTotalApostas += valor;
 
 		return apostas.size();
 	}
@@ -81,7 +81,7 @@ public class Cenario {
 	public int addAposta(String apostador, int valor, boolean previsao, double taxaAssegurada) {
 		Aposta aposta = new Aposta(apostador, valor, previsao, taxaAssegurada);
 		apostas.add(aposta);
-		caixa += valor;
+		valorTotalApostas += valor;
 		
 		return apostas.size();
 	}
@@ -91,8 +91,8 @@ public class Cenario {
 	 * @param apostaAssegurada o id da aposta a ser alterada. 
 	 * @param valor o novo valor da aposta assegurada. 
 	 */
-	public void alteraSeguroValor(int apostaAssegurada, int valor) {
-		apostas.get(apostaAssegurada).setSeguro(valor);
+	public boolean alteraSeguroValor(int apostaAssegurada, int valor) {
+		return apostas.get(apostaAssegurada).setSeguro(valor);
 	}
 
 	/**
@@ -100,16 +100,16 @@ public class Cenario {
 	 * @param apostaAssegurada o id da aposta a ser alterada. 
 	 * @param taxa a nova taxa da aposta assegurada. 
 	 */
-	public void alteraSeguroTaxa(int apostaAssegurada, double taxa) {
-		apostas.get(apostaAssegurada).setSeguro(taxa);
+	public boolean alteraSeguroTaxa(int apostaAssegurada, double taxa) {
+		return apostas.get(apostaAssegurada).setSeguro(taxa);
 	}
 
 	/**
 	 * Pega o total em centavos do valor apostado no cenário. 
 	 * @return valorTotalApostas 
 	 */
-	public int getCaixa() {
-		return this.caixa;
+	public int getValorTotalApostas() {
+		return this.valorTotalApostas;
 	}
 	
 	/**
@@ -200,13 +200,26 @@ public class Cenario {
 	 * @param apostaAssegurada o id da aposta a ser verificada. 
 	 * @return se a aposta está cadastrada ou não. 
 	 */
-	public boolean contem(int apostaAssegurada) {
-		if (!apostas.get(apostaAssegurada).equals(null)) {
+	public boolean contemAssegurada(int apostaAssegurada) {
+		if (ehAssegurada(apostaAssegurada)) {
 			return true;
 		}
 		return false;
 	}
 	
+	/**
+	 * Verifica se uma aposta é assegurada baseada no valor do seguro
+	 * @param apostaAssegurada o id da aposta a ser veirificada
+	 * @return true se for assegurada ou false caso contrario. 
+	 */
+	private boolean ehAssegurada(int apostaAssegurada) {
+		Aposta aposta = apostas.get(apostaAssegurada);
+		if (aposta.getValorAssegurado() != 0) {
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * Verifica se uma aposta é considerada vencedora.
 	 * @param aposta a aposta a ser verificada. 

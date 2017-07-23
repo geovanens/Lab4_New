@@ -106,16 +106,24 @@ public class Aposta {
 	 * Altera um seguro de taxa para valor.
 	 * @param valor o valor do seguro. 
 	 */
-	public void setSeguro(int valor) {
-		this.seguro = new SeguroValor(valor);
+	public boolean setSeguro(int valor) {
+		if (this.seguro instanceof SeguroTaxa) {
+			this.seguro = new SeguroValor(valor);
+			return true;
+		}
+		return false;
 	}
 	
 	/**
 	 * Altera um seguro de valor para taxa
 	 * @param taxa a  taxa do seguro. 
 	 */
-	public void setSeguro(double taxa) {
-		this.seguro = new SeguroTaxa(taxa, this.valor);
+	public boolean setSeguro(double taxa) {
+		if (this.seguro instanceof SeguroValor) {
+			this.seguro = new SeguroTaxa(taxa, this.valor);
+			return true;
+		}
+		return false;
 	}
 	
 	/**
