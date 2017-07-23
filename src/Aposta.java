@@ -23,7 +23,7 @@ public class Aposta {
 		this.apostador = apostador;
 		this.valor = valor;
 		this.previsao = previsao;
-		this.seguro = new Seguro();
+		this.seguro = new SemSeguro();
 	}
 	
 	/**
