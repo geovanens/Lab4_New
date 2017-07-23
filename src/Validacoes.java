@@ -4,7 +4,7 @@
  * @author Geovane do Nascimento Silva - 116211149
  *
  */
-public class Excecoes {
+public class Validacoes {
 	
 	/**
 	 * Verifica os parametros de inicialização do sistema. 
