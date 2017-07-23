@@ -12,7 +12,7 @@ public class SeguroValor extends Seguro{
 	 * @param valor o valor do seguro. 
 	 */
 	public SeguroValor(int valor) {
-		this.valor = valor;
+		super(valor);
 	}
 
 	/**
@@ -27,6 +27,11 @@ public class SeguroValor extends Seguro{
 		return formatado;
 	}
 	
+	@Override
+	public int getValor() {
+		return this.valor;
+	}
+	
 	/**
 	 * Complemtento para o toString da aposta. retorna string no modelo 
 	 * " - ASSEGURADA (VALOR) - R$ XX,XX"
@@ -35,5 +40,4 @@ public class SeguroValor extends Seguro{
 	public String toString() {
 		return " - ASSEGURADA(VALOR) - " + valorEmReais();
 	}
-
 }

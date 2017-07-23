@@ -12,8 +12,7 @@ public class SeguroTaxa extends Seguro{
 	 * @param valorAposta o valor da aposta a qual o seguro pertence. 
 	 */
 	public SeguroTaxa(double taxa, int valorAposta) {
-		this.taxa = taxa;
-		this.valor = (int) (taxa * valorAposta);
+		super(taxa, valorAposta);
 	}
 
 	/**
@@ -32,5 +31,10 @@ public class SeguroTaxa extends Seguro{
 	@Override
 	public String toString() {
 		return " - ASSEGURADA (TAXA) - " + seguroPercent() + "%";
+	}
+
+	@Override
+	public int getValor() {
+		return this.valor;
 	}
 }
