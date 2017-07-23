@@ -4,19 +4,16 @@ import org.junit.Test;
 
 public class SemSeguroTest {
 
+	Seguro semSeguro = new SemSeguro();
+
 	@Test
 	public void testGetValor() {
-		fail("Not yet implemented");
+		assertEquals(0, semSeguro.getValor());
 	}
 
 	@Test
 	public void testToString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSemSeguro() {
-		fail("Not yet implemented");
+		assertEquals("", semSeguro.toString());
 	}
 
 }

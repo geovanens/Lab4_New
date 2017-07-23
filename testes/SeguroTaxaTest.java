@@ -3,20 +3,16 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class SeguroTaxaTest {
+	
+	Seguro seguroTaxa = new SeguroTaxa(0.1, 1000);
 
 	@Test
 	public void testGetValor() {
-		fail("Not yet implemented");
+		assertEquals(100, seguroTaxa.getValor());
 	}
 
 	@Test
 	public void testToString() {
-		fail("Not yet implemented");
+		assertEquals(" - ASSEGURADA(TAXA) - 10%", seguroTaxa.toString());
 	}
-
-	@Test
-	public void testSeguroTaxa() {
-		fail("Not yet implemented");
-	}
-
 }
