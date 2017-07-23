@@ -27,6 +27,10 @@ public class SeguroValor extends Seguro{
 		return formatado;
 	}
 	
+	/**
+	 * Pega o valor do seguro. 
+	 * @return o valor do seguro. 
+	 */
 	@Override
 	public int getValor() {
 		return this.valor;

@@ -26,8 +26,8 @@ public class SeguroTaxa extends Seguro{
 	}
 	
 	/**
-	 *
-	 *
+	 * Pega o valor do seguro. 
+	 * @return o valor do seguro. 
 	 */
 	@Override
 	public int getValor() {
