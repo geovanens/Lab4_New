@@ -10,7 +10,7 @@ public class Controller {
 	
 	private int caixa;
 	private double taxa;
-	private Excecoes excecoes;
+	private Validacoes excecoes;
 	private HashMap<Integer, Cenario> cenarios;
 	
 	/**
@@ -18,7 +18,7 @@ public class Controller {
 	 */
 	public Controller() {
 		cenarios = new HashMap<>();
-		excecoes = new Excecoes();
+		excecoes = new Validacoes();
 	}
 	
 	/**
