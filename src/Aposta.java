@@ -107,7 +107,6 @@ public class Aposta {
 	 * @param valor o valor do seguro. 
 	 */
 	public void setSeguro(int valor) {
-//		this.seguro.setSeguro(valor);
 		this.seguro = new SeguroValor(valor);
 	}
 	
@@ -116,7 +115,6 @@ public class Aposta {
 	 * @param taxa a  taxa do seguro. 
 	 */
 	public void setSeguro(double taxa) {
-//		this.seguro.setSeguro(taxa, this.valor);
 		this.seguro = new SeguroTaxa(taxa, this.valor);
 	}
 	

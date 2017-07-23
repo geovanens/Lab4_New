@@ -13,6 +13,7 @@ public class SeguroTaxa extends Seguro{
 	 */
 	public SeguroTaxa(double taxa, int valorAposta) {
 		super(taxa, valorAposta);
+		this.taxa = taxa;
 	}
 
 	/**
@@ -20,7 +21,7 @@ public class SeguroTaxa extends Seguro{
 	 * @return o valor em porcentagem que a taxa representa.
 	 */
 	private int seguroPercent() {
-	    int percent = (int) (taxa * 100);
+	    int percent = (int) (this.taxa * 100);
 	    return percent;
 	}
 
@@ -30,7 +31,7 @@ public class SeguroTaxa extends Seguro{
 	 */
 	@Override
 	public String toString() {
-		return " - ASSEGURADA (TAXA) - " + seguroPercent() + "%";
+		return " - ASSEGURADA(TAXA) - " + seguroPercent() + "%";
 	}
 
 	@Override

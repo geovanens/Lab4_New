@@ -5,7 +5,6 @@
  */
 public abstract class Seguro {
 	protected int valor;
-	protected double taxa;
 	
 	/**
 	 * Contrutor para seguro generico, sem valor.
@@ -28,7 +27,6 @@ public abstract class Seguro {
 	 * @param valorAposta o valor da aposta a qual o seguro pertence.
 	 */
 	public Seguro(double taxa, int valorAposta) {
-		this.taxa = taxa;
 		this.valor = (int) (taxa * valorAposta);
 	}
 
