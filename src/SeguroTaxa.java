@@ -24,6 +24,15 @@ public class SeguroTaxa extends Seguro{
 	    int percent = (int) (this.taxa * 100);
 	    return percent;
 	}
+	
+	/**
+	 *
+	 *
+	 */
+	@Override
+	public int getValor() {
+		return this.valor;
+	}
 
 	/**
 	 * Complemtento para o toString da aposta. retorna string no modelo 
@@ -32,10 +41,5 @@ public class SeguroTaxa extends Seguro{
 	@Override
 	public String toString() {
 		return " - ASSEGURADA(TAXA) - " + seguroPercent() + "%";
-	}
-
-	@Override
-	public int getValor() {
-		return this.valor;
 	}
 }
