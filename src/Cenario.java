@@ -90,6 +90,7 @@ public class Cenario {
 	 * Altera uma aposta do tipo taxa para valor.
 	 * @param apostaAssegurada o id da aposta a ser alterada. 
 	 * @param valor o novo valor da aposta assegurada. 
+	 * @return true se for alterado ou falso em caso contrário .
 	 */
 	public boolean alteraSeguroValor(int apostaAssegurada, int valor) {
 		return apostas.get(apostaAssegurada).setSeguro(valor);
@@ -99,6 +100,7 @@ public class Cenario {
 	 * Altera uma aposta do tipo valor para taxa.
 	 * @param apostaAssegurada o id da aposta a ser alterada. 
 	 * @param taxa a nova taxa da aposta assegurada. 
+	 * @return true se for alterado ou falso em caso contrário .
 	 */
 	public boolean alteraSeguroTaxa(int apostaAssegurada, double taxa) {
 		return apostas.get(apostaAssegurada).setSeguro(taxa);

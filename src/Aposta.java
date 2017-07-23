@@ -105,6 +105,7 @@ public class Aposta {
 	/**
 	 * Altera um seguro de taxa para valor.
 	 * @param valor o valor do seguro. 
+	 * @return true se for alterado ou falso em caso contrário .
 	 */
 	public boolean setSeguro(int valor) {
 		if (this.seguro instanceof SeguroTaxa) {
@@ -117,6 +118,7 @@ public class Aposta {
 	/**
 	 * Altera um seguro de valor para taxa
 	 * @param taxa a  taxa do seguro. 
+	 * @return true se for alterado ou falso em caso contrário .
 	 */
 	public boolean setSeguro(double taxa) {
 		if (this.seguro instanceof SeguroValor) {
