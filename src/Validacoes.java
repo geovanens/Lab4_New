@@ -153,17 +153,14 @@ public class Validacoes {
 	 * @param valor o valor da aposta a ser verificado. Este valor não pode ser menor ou igual a zero. 
 	 */
 	public void alteracaoInvalida(int cenario, boolean containsKey, int apostaAssegurada, int valor) {
-		if (cenario <= 0) {
-			throw new IllegalArgumentException("Erro na alteracao de aposta: Cenario invalido");
-		}
-		else if (!containsKey) {
-			throw new IllegalArgumentException("Erro na alteracao de aposta: Cenario nao cadastrado");
-		}
-		else if (apostaAssegurada <= 0) {
-			throw new IllegalArgumentException("Erro na alteracao de aposta: Aposta invalida");
+		
+		String msg = "Erro na alteracao de aposta: ";
+		cenarioInvalido(cenario, containsKey, msg);
+		if (apostaAssegurada <= 0) {
+			throw new IllegalArgumentException(msg + "Aposta invalida");
 		}
 		else if (valor <= 0) {
-			throw new IllegalArgumentException("Erro na alteracao de aposta: Valor nao poder ser menor ou igual a zero");
+			throw new IllegalArgumentException(msg + "Valor nao poder ser menor ou igual a zero");
 		}
 		
 	}
@@ -176,17 +173,13 @@ public class Validacoes {
 	 * @param taxa a taxa da aposta a ser verificado. Este valor não pode ser menor ou igual a zero. 
 	 */
 	public void alteracaoInvalida(int cenario, boolean containsKey, int apostaAssegurada, double taxa) {
-		if (cenario <= 0) {
-			throw new IllegalArgumentException("Erro na alteracao de aposta: Cenario invalido");
-		}
-		else if (!containsKey) {
-			throw new IllegalArgumentException("Erro na alteracao de aposta: Cenario nao cadastrado");
-		}
-		else if (apostaAssegurada <= 0) {
-			throw new IllegalArgumentException("Erro na alteracao de aposta: Aposta invalida");
+		String msg = "Erro na alteracao de aposta: ";
+		cenarioInvalido(cenario, containsKey, msg);
+		if (apostaAssegurada <= 0) {
+			throw new IllegalArgumentException(msg + "Aposta invalida");
 		}
 		else if (taxa <= 0) {
-			throw new IllegalArgumentException("Erro na alteracao de aposta: Taxa n poder ser menor ou igual a 0");
+			throw new IllegalArgumentException(msg + "Taxa n poder ser menor ou igual a 0");
 		}
 	}
 }
