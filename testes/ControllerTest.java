@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Testes da classe Facade, como a mesma é uma classe que chama as demais todos as classes são testadas. 
+ * Testes da classe Controller 
  * @author Geovane do Nascimento Silva - 116211149
  *  *
  */
