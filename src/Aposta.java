@@ -39,7 +39,6 @@ public class Aposta {
 		this.valor = valor;
 		this.previsao = previsao;
 		this.seguro = new SeguroValor(valorAssegurado);
-//		this.seguro = new Seguro(valorAssegurado);
 	}
 
 	/**
@@ -55,7 +54,6 @@ public class Aposta {
 		this.valor = valor;
 		this.previsao = previsao;
 		this.seguro = new SeguroTaxa(taxaAssegurada, valor);
-//		this.seguro = new Seguro(taxaAssegurada, valor);
 	}
 
 	/**
