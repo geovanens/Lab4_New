@@ -204,4 +204,12 @@ public class Facade {
     public int getCaixa() {
     	return controleDoSistema.getCaixa();
     }
+    
+    public void alterarOrdem(String ordem) {
+    	controleDoSistema.alterarOrdem(ordem);
+    }
+    
+    public String exibirCenarioOrdenado(int cenario) {
+    	return controleDoSistema.exibirCenarioOrdenado(cenario);
+    }
 }

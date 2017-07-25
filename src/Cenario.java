@@ -6,11 +6,12 @@ import java.util.ArrayList;
  * @author Geovane do Nascimento Silva - 116211149
  *
  */
-public class Cenario {
+public class Cenario implements Comparable<Cenario> {
 	private final String NL = System.lineSeparator();
 	
 	protected Status status;
 	protected String descricao;
+
 	protected int id;
 	protected int valorTotalApostas;
 	protected boolean fechado;
@@ -100,7 +101,8 @@ public class Cenario {
 	 * Altera uma aposta do tipo valor para taxa.
 	 * @param apostaAssegurada o id da aposta a ser alterada. 
 	 * @param taxa a nova taxa da aposta assegurada. 
-	 * @return true se for alterado ou falso em caso contrário .
+	 * @return true se for alterado ou falso emnstructor stub
+	} caso contrário .
 	 */
 	public boolean alteraSeguroTaxa(int apostaAssegurada, double taxa) {
 		return apostas.get(apostaAssegurada).setSeguro(taxa);
@@ -250,4 +252,19 @@ public class Cenario {
 		}
 		return total;
 	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+
+	@Override
+	public int compareTo(Cenario o) {
+		return this.descricao.compareTo(o.getDescricao());
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	
 }

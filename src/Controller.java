@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 /**
@@ -12,6 +14,9 @@ public class Controller {
 	private double taxa;
 	private Validacoes excecoes;
 	private HashMap<Integer, Cenario> cenarios;
+	private ArrayList cenariosOrdenados;
+	private ComparacaoCadastro comparacaoApostas;
+	private ComparacaoCadastro comparacaoCadastro;
 	
 	/**
 	 * Método Construtor da classe. 
@@ -268,5 +273,32 @@ public class Controller {
 	 */
 	public double getTaxa() {
 		return this.taxa;
+	}
+
+	public void alterarOrdem(String ordem) {
+		if (ordem.equals("nome".toUpperCase())) {
+			ordenarPorNome();
+		}
+		else if (ordem.equals("apostas".toUpperCase())) {
+			ordenaTotalApostas();
+		}
+		
+	}
+
+	public String exibirCenarioOrdenado(int cenario) {
+		return cenariosOrdenados.get(cenario).toString();
+	}
+	
+	public void ordenarPorNome() {
+		this.cenariosOrdenados = new ArrayList<>(cenarios.values());
+		Collections.sort(this.cenariosOrdenados);
+    }
+	
+	public void ordenaTotalApostas() {
+		Collections.sort(this.cenariosOrdenados, comparacaoApostas);
+	}
+	
+	public void ordenaCadastro() {
+		Collections.sort(this.cenariosOrdenados, comparacaoCadastro);
 	}
 }
