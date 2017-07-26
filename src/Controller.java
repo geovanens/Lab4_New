@@ -14,9 +14,8 @@ public class Controller {
 	private double taxa;
 	private Validacoes excecoes;
 	private HashMap<Integer, Cenario> cenarios;
-	private ArrayList cenariosOrdenados;
-	private ComparacaoCadastro comparacaoApostas;
-	private ComparacaoCadastro comparacaoCadastro;
+	private ArrayList<Cenario> cenariosOrdenados;
+	private ComparacaoPorNumeroApostas comparacaoApostas;
 	
 	/**
 	 * Método Construtor da classe. 
@@ -282,11 +281,12 @@ public class Controller {
 		else if (ordem.equals("apostas".toUpperCase())) {
 			ordenaTotalApostas();
 		}
+		this.cenariosOrdenados = new ArrayList<>(cenarios.values());
 		
 	}
 
 	public String exibirCenarioOrdenado(int cenario) {
-		return cenariosOrdenados.get(cenario).toString();
+		return cenariosOrdenados.get(cenario-1).toString();
 	}
 	
 	public void ordenarPorNome() {
@@ -296,9 +296,5 @@ public class Controller {
 	
 	public void ordenaTotalApostas() {
 		Collections.sort(this.cenariosOrdenados, comparacaoApostas);
-	}
-	
-	public void ordenaCadastro() {
-		Collections.sort(this.cenariosOrdenados, comparacaoCadastro);
 	}
 }
