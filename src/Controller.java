@@ -12,7 +12,7 @@ public class Controller {
 	
 	private int caixa;
 	private double taxa;
-	private Validacoes excecoes;
+	private Validacoes valida;
 	private HashMap<Integer, Cenario> cenarios;
 	private ArrayList<Cenario> cenariosOrdenados;
 	private ComparacaoPorNumeroApostas comparacaoApostas;
@@ -23,7 +23,7 @@ public class Controller {
 	 */
 	public Controller() {
 		cenarios = new HashMap<>();
-		excecoes = new Validacoes();
+		valida = new Validacoes();
 	}
 	
 	/**
@@ -32,7 +32,7 @@ public class Controller {
 	 * @param taxa o valor da taxa para calculo de desconto de apostas perdedoras. 
 	 */
 	public void inicializaSistema(int caixa, double taxa) {
-		excecoes.inicializacaoInvalida(caixa, taxa);
+		valida.inicializacaoInvalida(caixa, taxa);
 		this.caixa = caixa;
 		this.taxa = taxa;
 	}
@@ -43,7 +43,7 @@ public class Controller {
 	 * @return o tamanho do mapa de cenarios indicando a posicao do atual cenario cadastrado.
 	 */
 	public int cadastrarCenario(String descricao) {
-		excecoes.descricaoVazia(descricao);
+		valida.descricaoVazia(descricao);
 		cenarios.put(cenarios.size()+1, new Cenario(descricao, cenarios.size()+1));
 		return cenarios.size();
 	}
@@ -55,8 +55,8 @@ public class Controller {
 	 * @return o tamanho do mapa de cenarios indicando a posicao do atual cenario cadastrado.
 	 */
 	public int cadastrarCenario(String descricao, int bonus) {
-		excecoes.descricaoVazia(descricao);
-		excecoes.bonus(bonus);
+		valida.descricaoVazia(descricao);
+		valida.bonus(bonus);
 		cenarios.put(cenarios.size()+1, new CenarioBonus(descricao, cenarios.size()+1, bonus));
 		caixa -= bonus;
 		return cenarios.size();
@@ -71,7 +71,7 @@ public class Controller {
 	 */
 	public void cadastrarAposta(int cenario, String apostador, int valor, String previsao) {
 		String msg = "Erro no cadastro de aposta: ";
-		excecoes.apostaInvalida(cenario, cenarios.containsKey(cenario), apostador, valor, previsao, msg);
+		valida.apostaInvalida(cenario, cenarios.containsKey(cenario), apostador, valor, previsao, msg);
 		
 		boolean previsaoCadastro;
 		previsaoCadastro = previsao.equals("VAI ACONTECER")?true : false;
@@ -90,8 +90,8 @@ public class Controller {
 	 */
 	public int cadastrarAposta(int cenario, String apostador, int valor, String previsao, int valorAssegurado, int custo) {
 		String msg = "Erro no cadastro de aposta assegurada por valor: ";
-		excecoes.apostaInvalida(cenario, cenarios.containsKey(cenario), apostador, valor, previsao, msg);
-		excecoes.seguroInvalido(valorAssegurado, custo);
+		valida.apostaInvalida(cenario, cenarios.containsKey(cenario), apostador, valor, previsao, msg);
+		valida.seguroInvalido(valorAssegurado, custo);
 		
 		caixa += custo;
 		boolean previsaoCadastro;
@@ -111,8 +111,8 @@ public class Controller {
 	 */
 	public int cadastrarAposta(int cenario, String apostador, int valor, String previsao, double taxaAssegurada, int custo) {
 		String msg = "Erro no cadastro de aposta assegurada por taxa: ";
-		excecoes.apostaInvalida(cenario, cenarios.containsKey(cenario), apostador, valor, previsao, msg);
-		excecoes.seguroInvalido(taxaAssegurada, custo);
+		valida.apostaInvalida(cenario, cenarios.containsKey(cenario), apostador, valor, previsao, msg);
+		valida.seguroInvalido(taxaAssegurada, custo);
 		
 		caixa += custo;
 		boolean previsaoCadastro;
@@ -127,7 +127,7 @@ public class Controller {
 	 */
 	public String exibirCenario(int cenario) {
 		String msg = "Erro na consulta de cenario: ";
-		excecoes.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
+		valida.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
 		
 		return cenarios.get(cenario).toString();
 	}
@@ -151,7 +151,7 @@ public class Controller {
 	 */
 	public String exibirApostas(int cenario) {
 		String msg = "Erro na exibicao de apostas: ";
-		excecoes.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
+		valida.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
 		return cenarios.get(cenario).exibirApostas();
 	}
 	
@@ -162,7 +162,7 @@ public class Controller {
 	 */
 	public int valorApostas(int cenario) {
 		String msg = "Erro na consulta do valor total de apostas: ";
-		excecoes.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
+		valida.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
 		
 		int total = 0;
 		Cenario cenarioVerificar = cenarios.get(cenario);
@@ -177,7 +177,7 @@ public class Controller {
 	 */
 	public int totalApostas(int cenario) {
 		String msg = "Erro na consulta do total de apostas: ";
-		excecoes.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
+		valida.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
 		
 		return cenarios.get(cenario).totalApostas();
 	}
@@ -190,8 +190,8 @@ public class Controller {
 	 */
 	public void fecharAposta(int cenario, boolean ocorreu) {
 		String msg = "Erro ao fechar aposta: ";
-		excecoes.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
-		excecoes.cenarioFechado(cenarios.get(cenario).isFechado(), msg);
+		valida.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
+		valida.cenarioFechado(cenarios.get(cenario).isFechado(), msg);
 		
 		this.cenarios.get(cenario).fecharAposta(ocorreu);
 		caixa += getCaixaCenario(cenario);
@@ -206,8 +206,8 @@ public class Controller {
 	 */
 	public int getCaixaCenario(int cenario) {
 		String msg = "Erro na consulta do caixa do cenario: ";
-		excecoes.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
-		excecoes.cenarioAberto(!cenarios.get(cenario).isFechado(), msg);
+		valida.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
+		valida.cenarioAberto(!cenarios.get(cenario).isFechado(), msg);
 		
 		return this.cenarios.get(cenario).getCaixaCenario(taxa);
 	}
@@ -220,8 +220,8 @@ public class Controller {
 	 */
 	public int getTotalRateioCenario(int cenario) {
 		String msg = "Erro na consulta do total de rateio do cenario: ";
-		excecoes.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
-		excecoes.cenarioAberto(!cenarios.get(cenario).isFechado(), msg);
+		valida.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
+		valida.cenarioAberto(!cenarios.get(cenario).isFechado(), msg);
 		
 		int getCaixaCenario = getCaixaCenario(cenario);
 		return this.cenarios.get(cenario).getTotalRateio(getCaixaCenario, taxa);
@@ -236,8 +236,8 @@ public class Controller {
      */
 	public int alteraSeguroValor(int cenario, int idAssegurada, int valor) {
 		int apostaAssegurada = idAssegurada-1;
-		excecoes.alteracaoInvalida(cenario, cenarios.containsKey(cenario), idAssegurada, valor);
-		excecoes.naoContemAposta(cenarios.get(cenario).contemAssegurada(apostaAssegurada));
+		valida.alteracaoInvalida(cenario, cenarios.containsKey(cenario), idAssegurada, valor);
+		valida.naoContemAposta(cenarios.get(cenario).contemAssegurada(apostaAssegurada));
 		
 		cenarios.get(cenario).alteraSeguroValor(apostaAssegurada, valor);
 		return idAssegurada;
@@ -252,8 +252,8 @@ public class Controller {
      */
 	public int alteraSeguroTaxa(int cenario, int idAssegurada, double taxa) {
 		int apostaAssegurada = idAssegurada-1;
-		excecoes.alteracaoInvalida(cenario, cenarios.containsKey(cenario), idAssegurada, taxa);
-		excecoes.naoContemAposta(cenarios.get(cenario).contemAssegurada(apostaAssegurada));
+		valida.alteracaoInvalida(cenario, cenarios.containsKey(cenario), idAssegurada, taxa);
+		valida.naoContemAposta(cenarios.get(cenario).contemAssegurada(apostaAssegurada));
 		
 		cenarios.get(cenario).alteraSeguroTaxa(apostaAssegurada, taxa);
 		return idAssegurada;
@@ -276,6 +276,7 @@ public class Controller {
 	}
 
 	public void alterarOrdem(String ordem) {
+		valida.ordemInvalida(ordem);
 		if (ordem.toUpperCase().equals("NOME")) {
 			ordenarPorNome();
 		}
@@ -290,6 +291,8 @@ public class Controller {
 	}
 
 	public String exibirCenarioOrdenado(int cenario) {
+		String msg = "Erro na consulta de cenario ordenado: ";
+		valida.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
 		if (this.alterouOrdem == 0) {
 			this.cenariosOrdenados = new ArrayList<>(cenarios.values());
 		}

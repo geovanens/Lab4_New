@@ -182,4 +182,16 @@ public class Validacoes {
 			throw new IllegalArgumentException(msg + "Taxa n poder ser menor ou igual a 0");
 		}
 	}
+
+	public void ordemInvalida(String ordem1) {
+		String ordem = ordem1.toUpperCase();
+		String msg = "Erro ao alterar ordem: ";
+		if (ordem.trim().isEmpty()) {
+			throw new IllegalArgumentException(msg + "Ordem nao pode ser vazia ou nula");
+		}
+		else if (!ordem.equals("NOME") && !ordem.equals("APOSTAS") && !ordem.equals("CADASTRO")) {
+			throw new IllegalArgumentException(msg + "Ordem invalida");
+		}
+		
+	}
 }
