@@ -6,7 +6,7 @@
 public enum Status {
 	NAO_FINALIZADO("Nao finalizado"),
 	OCORREU("Finalizado (ocorreu)"),
-	NAO_OCORREU("Finalizado (nao ocorreu)");
+	NAO_OCORREU("Finalizado (n ocorreu)");
 	private final String valor;
 	
 	/**
