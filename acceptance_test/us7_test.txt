@@ -43,13 +43,6 @@ expect "1 - O aluno Viktor Borgino vai pagar PLP - Finalizado (n ocorreu)" exibi
 expect "4 - As provas vao ser corrigidas ate sexta - Finalizado (ocorreu) - R$ 10,00" exibirCenarioOrdenado cenario=5
 expect "7 - Este cenario tambem tem seguro - Nao finalizado - R$ 10,00" exibirCenarioOrdenado cenario=6
 expect "5 - As provas nao vao ser corrigidas ate sexta - Nao finalizado - R$ 0,10" exibirCenarioOrdenado cenario=7
-expect 0 totalDeApostas cenario=1
-expect 0 totalDeApostas cenario=2
-expect 0 totalDeApostas cenario=3
-expect 0 totalDeApostas cenario=4
-expect 0 totalDeApostas cenario=5
-expect 0 totalDeApostas cenario=6
-expect 1 totalDeApostas cenario=7
 
 alterarOrdem ordem="cadastro"
 expect "1 - O aluno Viktor Borgino vai pagar PLP - Finalizado (n ocorreu)" exibirCenarioOrdenado cenario=1
