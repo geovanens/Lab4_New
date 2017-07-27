@@ -22,8 +22,10 @@ public class Controller {
 	 * Método Construtor da classe. 
 	 */
 	public Controller() {
-		cenarios = new HashMap<>();
-		valida = new Validacoes();
+		this.cenarios = new HashMap<>();
+		this.valida = new Validacoes();
+		this.comparacaoApostas = new ComparacaoPorNumeroApostas();
+		
 	}
 	
 	/**
