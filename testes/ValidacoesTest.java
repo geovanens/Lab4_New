@@ -230,5 +230,21 @@ public class ValidacoesTest {
 	public void testAlteracaoTaxaInvalidaTaxaInvalida() {
 		control.alteraSeguroTaxa(1, 2, 0);
 	}
+	
+	/**
+	 * Testa se ao tentar executar ordenação com parametro inválido a exceção é lançada
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testOrdemInvalida() {
+		control.alterarOrdem("qqer");
+	}
+	
+	/**
+	 * Testa se ao tentar executar ordenação com parametro nulo a exceção é lançada
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testOrdemVaziaNula() {
+		control.alterarOrdem("");
+	}
 
 }

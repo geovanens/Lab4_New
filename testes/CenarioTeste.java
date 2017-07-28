@@ -117,7 +117,7 @@ public class CenarioTeste {
 	@Test
 	public void testFecharApostaNOcorreu() {
 		cenarioBase.fecharAposta(false);
-		assertEquals("Finalizado (nao ocorreu)", cenarioBase.getEstado());
+		assertEquals("Finalizado (n ocorreu)", cenarioBase.getEstado());
 	}
 	
 	/**
@@ -199,6 +199,35 @@ public class CenarioTeste {
 		assertTrue(cenarioBase.contemAssegurada(1));
 		assertTrue(cenarioBase.contemAssegurada(4));
 		assertFalse(cenarioBase.contemAssegurada(3));
+	}
+	
+	/**
+	 * Testa se o retorno de getDescricao está conforme o esperado. 
+	 */
+	@Test
+	public void testGetDescricao() {
+		assertEquals("Vou blocar o período", cenarioBase.getDescricao());
+	}
+	
+	/**
+	 * Testa o compareTo para os 3 casos possiveis. 
+	 */
+	@Test
+	public void testCompareTo() {
+		Cenario cen1 = new Cenario("EU VOU", 1);
+		Cenario cen2 = new Cenario("EU VOU", 2);
+		Cenario cen3 = new Cenario("AMANHA EU VOU", 3);
+		assertEquals(0, cen1.compareTo(cen2));
+		assertTrue(cen3.compareTo(cen1) < 0);
+		assertTrue(cen1.compareTo(cen3) > 0);
+	}
+	
+	/**
+	 * Testa se o retorno de getId está conforme o esperado. 
+	 */
+	@Test
+	public void testGetId() {
+		assertEquals(1, cenarioBase.getId());
 	}
 
 }

@@ -236,4 +236,64 @@ public class ControllerTest {
 		control.fecharAposta(1, true);
 		assertEquals(17500, control.getCaixa());
 	}
+	
+	/**
+	 * Testa o metodo de ordenar os cenarios para o caso de ordenação por ordem de cadastro. 
+	 */
+	@Test
+	public void testAlterarOrdemCadastro() {
+		control.alterarOrdem("cadastro");
+		assertEquals("1 - EU VOU! - Nao finalizado", control.exibirCenarioOrdenado(1));
+		assertEquals("2 - EU NÃO VOU - Nao finalizado", control.exibirCenarioOrdenado(2));
+	}
+	
+	/**
+	 * Testa o metodo de ordenar os cenarios para o caso de ordenação por ordem de nome.
+	 */
+	@Test
+	public void testAlterarOrdemNome() {
+		control.alterarOrdem("nome");
+		assertEquals("2 - EU NÃO VOU - Nao finalizado", control.exibirCenarioOrdenado(1));
+		assertEquals("1 - EU VOU! - Nao finalizado", control.exibirCenarioOrdenado(2));
+	}
+	
+	/**
+	 * Testa o metodo de ordenar os cenarios para o caso de ordenação por ordem de total de apostas do cenario.
+	 */
+	@Test
+	public void testAlterarOrdemApostas() {
+		control.alterarOrdem("apostas");
+		assertEquals("1 - EU VOU! - Nao finalizado", control.exibirCenarioOrdenado(1));
+		assertEquals("2 - EU NÃO VOU - Nao finalizado", control.exibirCenarioOrdenado(2));
+	}
+	
+	/**
+	 * Testa o metodo de ordenar os cenarios para o caso de ordenação por ordem de total de apostas do cenario 
+	 * em caso de o total de apostas ser igual. 
+	 */
+	@Test
+	public void testAlterarOrdemApostasIguais() {
+		control.cadastrarAposta(2, "EU", 10, "VAI ACONTECER");
+		control.cadastrarAposta(2, "TU", 20, "VAI ACONTECER");
+		control.cadastrarAposta(2, "ELE", 30, "VAI ACONTECER");
+		control.alterarOrdem("apostas");
+		assertEquals("1 - EU VOU! - Nao finalizado", control.exibirCenarioOrdenado(1));
+		assertEquals("2 - EU NÃO VOU - Nao finalizado", control.exibirCenarioOrdenado(2));
+	}
+	
+	/**
+	 * Testa o metodo de exibir um cenario ordenado com um parametro invalido, exceção é esperada
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testExibirCenarioOrdenadoInvalido() {
+		control.exibirCenarioOrdenado(0);
+	}
+	
+	/**
+	 * Testa o metodo de exibir um cenario ordenado com um cenario nao cadastrado, exceção é esperada
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testExibirCenarioOrdenadoNaoCadastrado() {
+		control.exibirCenarioOrdenado(3);
+	}
 }
