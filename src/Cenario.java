@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe responsável pelos cenários de apostas. 
@@ -15,7 +16,7 @@ public class Cenario implements Comparable<Cenario> {
 	protected int id;
 	protected int valorTotalApostas;
 	protected boolean fechado;
-	protected ArrayList<Aposta> apostas;
+	protected List<Aposta> apostas;
 	
 	/**
 	 * Metódo contrutor da Classe Cenario
@@ -155,6 +156,7 @@ public class Cenario implements Comparable<Cenario> {
 	}
 	
 	/**
+	 * Pega a situação do enum Status
 	 * @return a situação do cenario, se ainda nao está finalizado, ou caso contratio se 
 	 * ocorreu ou não.
 	 */
@@ -253,15 +255,26 @@ public class Cenario implements Comparable<Cenario> {
 		return total;
 	}
 	
+	/**
+	 * Pega a descrição do cenario.  
+	 * @return a descrição do um cenário. 
+	 */
 	public String getDescricao() {
 		return descricao;
 	}
 
+	/**
+	 * Compara o cenário com outro cenário. O parametro usado é a descrição do cenarios(Ordem Lexicográfica). 
+	 */
 	@Override
 	public int compareTo(Cenario o) {
 		return this.descricao.compareTo(o.getDescricao());
 	}
 
+	/**
+	 * Pega o id do cenário. 
+	 * @return a identificação do cenário. 
+	 */
 	public int getId() {
 		return id;
 	}

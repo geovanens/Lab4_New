@@ -205,10 +205,19 @@ public class Facade {
     	return controleDoSistema.getCaixa();
     }
     
+    /**
+     * Envia ao controleDoSistema uma solititação para que a ordenação seja alterada. 
+     * @param ordem a ordem em que os cenários devem ser ordenados. Pode ser: "nome", "apostas" ou "cadastro". 
+     */
     public void alterarOrdem(String ordem) {
     	controleDoSistema.alterarOrdem(ordem);
     }
     
+    /**
+     * Solicita ao controleDoSistema a representação em String de um cenário depois de ordenado. 
+     * @param cenario a posição do cenário pós ordenação. 
+     * @return a representação em String do cenário. 
+     */
     public String exibirCenarioOrdenado(int cenario) {
     	return controleDoSistema.exibirCenarioOrdenado(cenario);
     }

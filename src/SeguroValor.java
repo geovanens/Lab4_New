@@ -2,7 +2,7 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 
 /**
- * Classe representa um seguro do tipo valor
+ * Classe representa um seguro do tipo valor, extensão de Seguro
  * @author Geovane do Nascimento Silva - 116211149
  */
 public class SeguroValor extends Seguro{

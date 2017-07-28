@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Classe responsável pelas ações de controle do Sistema.
@@ -13,10 +15,10 @@ public class Controller {
 	private int caixa;
 	private double taxa;
 	private Validacoes valida;
-	private HashMap<Integer, Cenario> cenarios;
-	private ArrayList<Cenario> cenariosOrdenados;
+	private Map<Integer, Cenario> cenarios;
+	private List<Cenario> cenariosOrdenados;
 	private ComparacaoPorNumeroApostas comparacaoApostas;
-	private int alterouOrdem = 0;
+	private boolean alterouOrdem;
 	
 	/**
 	 * Método Construtor da classe. 
@@ -25,6 +27,7 @@ public class Controller {
 		this.cenarios = new HashMap<>();
 		this.valida = new Validacoes();
 		this.comparacaoApostas = new ComparacaoPorNumeroApostas();
+		this.alterouOrdem = false;
 		
 	}
 	
@@ -277,6 +280,10 @@ public class Controller {
 		return this.taxa;
 	}
 
+	/**
+     * Gerencia o tipo de ordenação que será executada
+     * @param ordem a ordem em que os cenários devem ser ordenados. Pode ser: "nome", "apostas" ou "cadastro". 
+     */
 	public void alterarOrdem(String ordem) {
 		valida.ordemInvalida(ordem);
 		if (ordem.toUpperCase().equals("NOME")) {
@@ -288,25 +295,37 @@ public class Controller {
 		else {
 			this.cenariosOrdenados = new ArrayList<>(cenarios.values());
 		}
-		this.alterouOrdem++;
+		this.alterouOrdem = true;
 		
 	}
 
+	/**
+	 * Exibe um cenário ordenado. 
+	 * @param cenario a posição do cenário em ordem. 
+	 * @return a representação em String do cenário. 
+	 */
 	public String exibirCenarioOrdenado(int cenario) {
 		String msg = "Erro na consulta de cenario ordenado: ";
 		valida.cenarioInvalido(cenario, cenarios.containsKey(cenario), msg);
-		if (this.alterouOrdem == 0) {
+		if (!alterouOrdem) {
 			this.cenariosOrdenados = new ArrayList<>(cenarios.values());
 		}
 		return this.cenariosOrdenados.get(cenario-1).toString();
 	}
 	
-	public void ordenarPorNome() {
+	/**
+	 * Método auxiliar de ordenação de cenários por ordem de descrição. 
+	 */
+	private void ordenarPorNome() {
 		this.cenariosOrdenados = new ArrayList<>(cenarios.values());
 		Collections.sort(this.cenariosOrdenados);
     }
 	
-	public void ordenaTotalApostas() {
+	/**
+	 * Método auxiliar de ordenação por ordem de total de apostas de um cenário. Cenários com maior numero de apostas 
+	 * vem antes dos demais. 
+	 */
+	private void ordenaTotalApostas() {
 		this.cenariosOrdenados = new ArrayList<>(cenarios.values());
 		Collections.sort(this.cenariosOrdenados, comparacaoApostas);
 	}

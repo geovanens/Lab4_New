@@ -1,4 +1,7 @@
-
+/**
+ * Classe representa um seguro do SemSeguro, extensão de Seguro
+ * @author Geovane do Nascimento Silva - 116211149
+ */
 public class SemSeguro extends Seguro {
 
 	/**

@@ -1,5 +1,5 @@
 /**
- * Classe representa um seguro do tipo taxa
+ * Classe representa um seguro do tipo taxa, extensão de Seguro
  * @author Geovane do Nascimento Silva - 116211149
  *
  */

@@ -183,6 +183,10 @@ public class Validacoes {
 		}
 	}
 
+	/**
+	 * Verifica o parametro para ordenação de cenários. 
+	 * @param ordem1 o parametro a ser verificado. Indica o tipo de ordenação. 
+	 */
 	public void ordemInvalida(String ordem1) {
 		String ordem = ordem1.toUpperCase();
 		String msg = "Erro ao alterar ordem: ";
